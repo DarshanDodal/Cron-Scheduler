@@ -37,11 +37,18 @@ const port = 3000;
 //     })
 // })
 
+
+/**
+ * Get all existing schedules
+ */
 app.get("/cron/schedules", (req, res) => {
     const schedules = getTasks();
     res.send(schedules);
 })
 
+/**
+ * New Schedule
+ */
 app.post("/cron/schedule", (req, res) => {
     req.body.forEach((el, i) => {
         newTask(el);
@@ -49,8 +56,20 @@ app.post("/cron/schedule", (req, res) => {
     res.send("OK");
 })
 
+/**
+ * Delete a schedule by schedule id
+ */
 app.delete("/cron/schedule/:scheduleId", (req, res) => {
     var delT = deleteTask(req.params.scheduleId)
+    res.send(delT);
+})
+
+
+/**
+ * Delete all schedules that belong to dbScheduleId
+ */
+app.delete("/cron/schedule/batch/:dbScheduleId", (req, res) => {
+    var delT = deleteBatch(req.params.dbScheduleId);
     res.send(delT);
 })
 
