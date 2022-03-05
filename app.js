@@ -5,7 +5,8 @@ const {
     getCurrentSchedules,
     getTasks,
     newTask,
-    deleteTask
+    deleteTask,
+    batchdelete
 } = require("./db/db")
 const {
     batchExecute
@@ -16,7 +17,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
-const port = 3000;
+const port = 2022;
 
 // Add a middlewre to check if the request is made by some valid user
 
@@ -69,7 +70,7 @@ app.delete("/cron/schedule/:scheduleId", (req, res) => {
  * Delete all schedules that belong to dbScheduleId
  */
 app.delete("/cron/schedule/batch/:dbScheduleId", (req, res) => {
-    var delT = deleteBatch(req.params.dbScheduleId);
+    var delT = batchdelete(req.params.dbScheduleId);
     res.send(delT);
 })
 

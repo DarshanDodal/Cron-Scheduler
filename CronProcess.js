@@ -16,12 +16,16 @@ const onTick = () => {
     if (cs.length > 0) {
         cs.forEach((el, i) => {
             batchExecute(el).then((data) => {
-                deleteTask(el.scheduleId);
+                deleteBatchSchedule(el).then(() => {
+                    deleteTask(el.scheduleId);
+                }).catch(() => {
+                    console.log(err);
+                })
             }).catch((err) => {
                 console.log(err);
                 // If API call failed try once again in other round
             })
-        })
+        });
     }
 
     //if does not exist do nothing.

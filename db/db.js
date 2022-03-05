@@ -26,7 +26,7 @@ module.exports.getTasks = () => {
 
 module.exports.newTask = (schedule) => {
     const time2millis = new Date(schedule.ts).getTime();
-    const NS = db.prepare("INSERT INTO schedules (scheduleId,deviceId,dbScheduleId, ts,state,deviceAction) VALUES (?,?,?,?,?)");
+    const NS = db.prepare("INSERT INTO schedules (scheduleId,deviceId,dbScheduleId, ts,state,deviceAction) VALUES (?,?,?,?,?,?)");
     const status = NS.run(schedule.scheduleId, schedule.deviceId, schedule.dbScheduleId, time2millis, schedule.state, schedule.deviceAction);
     return status.changes;
 }
