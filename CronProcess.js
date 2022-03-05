@@ -1,10 +1,12 @@
 var CronJob = require('cron').CronJob;
 const {
     getCurrentSchedules,
+    countTasksbydbScheduleId,
     deleteTask
 } = require("./db/db")
 const {
-    batchExecute
+    batchExecute,
+    deleteBatchSchedule
 } = require("./API-External")
 
 const onTick = () => {
@@ -16,11 +18,15 @@ const onTick = () => {
     if (cs.length > 0) {
         cs.forEach((el, i) => {
             batchExecute(el).then((data) => {
-                deleteBatchSchedule(el).then(() => {
-                    deleteTask(el.scheduleId);
-                }).catch(() => {
-                    console.log(err);
-                })
+                const schedulesOfBatchLeft = countTasksbydbScheduleId();
+                deleteTask(el.scheduleId);
+                if (schedulesOfBatchLeft < 1) {
+                    deleteBatchSchedule(el).then(() => {
+                        console.log("Batch Removed from mongo database");
+                    }).catch(() => {
+                        console.log(err);
+                    })
+                }
             }).catch((err) => {
                 console.log(err);
                 // If API call failed try once again in other round

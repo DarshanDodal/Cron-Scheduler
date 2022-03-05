@@ -43,6 +43,12 @@ module.exports.batchdelete = (dbScheduleId) => {
     return exec;
 }
 
+module.exports.countTasksbydbScheduleId = (dbScheduleId) => {
+    const schedulesCount = db.prepare("SELECT dbScheduleId FROM schedules WHERE dbScheduleId= ?");
+    const dbData = schedulesCount.all(dbScheduleId);
+    return dbData.length;
+}
+
 // const sqlite3 = require('sqlite3').verbose();
 // // var db = new sqlite3.Database(':memory:');
 

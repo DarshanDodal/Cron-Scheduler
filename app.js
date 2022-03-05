@@ -6,7 +6,8 @@ const {
     getTasks,
     newTask,
     deleteTask,
-    batchdelete
+    batchdelete,
+    countTasksbydbScheduleId
 } = require("./db/db")
 const {
     batchExecute
@@ -36,6 +37,18 @@ const port = 2022;
 //     }).catch((err) => {
 //         console.log(err);
 //     })
+// })
+
+// app.get("/test", (req, res) => {
+//     const count = countTasksbydbScheduleId("qwertyrt");
+//     console.log(count);
+//     res.send("count");
+// })
+
+// app.get("/test1", (req, res) => {
+//     const count = getTasks();
+//     console.log(count);
+//     res.send("count");
 // })
 
 
