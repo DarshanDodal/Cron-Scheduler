@@ -1,0 +1,28 @@
+{
+  "name": "cronscheduler",
+  "version": "1.0.0",
+  "description": "Node Cron Scheduler as a part of CronService.",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarshanDodal/CronScheduler.git"
+  },
+  "author": "Darshan Dodal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DarshanDodal/CronScheduler/issues"
+  },
+  "homepage": "https://github.com/DarshanDodal/CronScheduler#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1087.0",
+    "axios": "^0.26.0",
+    "better-sqlite3": "^7.5.0",
+    "cron": "^1.8.2",
+    "express": "^4.17.3",
+    "node-fetch": "^3.2.1",
+    "pg": "^8.7.3"
+  }
+}
