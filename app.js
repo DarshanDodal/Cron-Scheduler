@@ -18,6 +18,12 @@ app.use(express.urlencoded({
 app.use(express.json());
 const port = 3000;
 
+// Add a middlewre to check if the request is made by some valid user
+
+// get the user info, if the device name in request does not match with the devices 
+// that exist under that user, then reject the request 
+
+
 // app.get("/test", (req, res) => {
 //     batchExecute({
 //         scheduleId: "ugtf265",
@@ -37,7 +43,9 @@ app.get("/cron/schedules", (req, res) => {
 })
 
 app.post("/cron/schedule", (req, res) => {
-    var newT = newTask(req.body);
+    req.body.forEach((el, i) => {
+        newTask(el);
+    })
     res.send("OK");
 })
 
